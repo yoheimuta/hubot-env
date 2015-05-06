@@ -2,7 +2,9 @@
 
 [![NPM](https://nodei.co/npm/hubot-env.png)](https://nodei.co/npm/hubot-env/)
 
-Hubot reads environment variables
+Hubot reads environment variables dynamically.
+
+If you use [hubot-aws](https://github.com/yoheimuta/hubot-aws) for example, you can switch environment variables about AWS Account Credentials via hubot command dynamically.
 
 ## Installation
 
@@ -35,9 +37,11 @@ hubot env load --filename=[filename] --dry-run - Try loading [filename] of envir
 Set environment variables like an example below.
 
 ```ruby
-export HUBOT_ENV_BASE_PATH="${HOME}/files/env"
+export HUBOT_ENV_BASE_PATH="${HOME}/example"
 export HUBOT_ENV_HIDDEN_WORDS="SECRET_ACCESS_KEY,PASSWORD,TOKEN,API_KEY"
 ```
+
+You can parepare your own env files by referring to the [example files](https://github.com/yoheimuta/hubot-env/tree/master/example).
 
 ## Examples
 
