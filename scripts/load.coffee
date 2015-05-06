@@ -10,6 +10,8 @@ path = require 'path'
 env  = require 'node-env-file'
 _    = require 'underscore'
 
+brain_key = "hubot-env"
+
 getArgParams = (arg) ->
     dry_run = if arg.match(/--dry-run/) then true else false
 
@@ -34,6 +36,16 @@ showLoadedEnv = (msg, prev_process_env) ->
   message   = messages.join "\n"
   message ||= '[None]'
   msg.send message
+
+saveInBrain = (robot, prev_process_env) ->
+  loaded = robot.brain.get(brain_key) ? { env: {} }
+
+  for key, value of process.env
+    continue if key == 'ENV_FILE'
+    continue if (key of prev_process_env) && (value == prev_process_env[key])
+    loaded.env[key] = value
+
+  robot.brain.set(brain_key, loaded)
 
 showDetailBeforeApply = (msg, file_path) ->
   hidden_words = process.env.HUBOT_ENV_HIDDEN_WORDS
@@ -82,3 +94,5 @@ module.exports = (robot) ->
     env file_path, {overwrite: true}
 
     showLoadedEnv msg, prev_process_env
+
+    saveInBrain robot, prev_process_env
