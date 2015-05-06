@@ -14,4 +14,4 @@ module.exports = (robot) ->
       process.env[key] = value
       console.log "hubot env bootstrap loaded #{key} => #{value}"
 
-  robot.brain.on "loaded", storageLoaded
+  robot.brain.once "loaded", storageLoaded
