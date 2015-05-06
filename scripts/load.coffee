@@ -10,6 +10,14 @@ path = require 'path'
 env  = require 'node-env-file'
 _    = require 'underscore'
 
+getArgParams = (arg) ->
+    dry_run = if arg.match(/--dry-run/) then true else false
+
+    filename_capture = /--filename=(.*?)( |$)/.exec(arg)
+    filename = if filename_capture then filename_capture[1] else null
+
+    return { dry_run : dry_run, filename: filename }
+
 showLoadedEnv = (msg, prev_process_env) ->
   hidden_words = process.env.HUBOT_ENV_HIDDEN_WORDS
   hiddens = hidden_words.split(',') if hidden_words
@@ -47,9 +55,14 @@ showDetailBeforeApply = (msg, file_path) ->
   msg.send message
 
 module.exports = (robot) ->
-  robot.respond /env load --filename=(.*?)(| --dry-run)$/i, (msg) ->
-    filename = msg.match[1].trim() || ''
-    dry_run  = if msg.match[2] then true else false
+  robot.respond /env load(.*)$/i, (msg) ->
+    arg_params = getArgParams(msg.match[1])
+
+    dry_run    = arg_params.dry_run
+    filename   = arg_params.filename
+    unless filename
+      msg.send "Error: Empty filename is invalid"
+      return
 
     base_path = process.env.HUBOT_ENV_BASE_PATH || ''
     file_path = path.resolve base_path, filename
@@ -61,6 +74,7 @@ module.exports = (robot) ->
 
     if dry_run
       showDetailBeforeApply msg, file_path
+      msg.send "Complete dry-run"
       return
 
     prev_process_env = _.clone process.env
