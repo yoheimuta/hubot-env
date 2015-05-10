@@ -1,7 +1,7 @@
 {
   "name": "hubot-env",
-  "version": "0.0.1",
-  "description": "Hubot reads environment variables",
+  "version": "0.0.2",
+  "description": "Hubot manages environment variables in process.env and redis",
   "repository": {
       "type": "git",
       "url": "ssh://git@github.com/yoheimuta/hubot-env.git"
@@ -20,7 +20,10 @@
     "hubot env",
     "hubot-env",
     "hubot environment",
-    "hubot environment variables"
+    "hubot environment variables",
+    "hubot persistent",
+    "hubot persistent environment",
+    "hubot redis environment"
   ],
   "bugs": {
     "url": "https://github.com/yoheimuta/hubot-env/issues"
