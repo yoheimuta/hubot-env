@@ -1,9 +1,9 @@
 # Description:
-#   Flush all current environment variables in redis and process.env
+#   Flush all current environment variables in process.env and redis
 #
 # Commands:
-#   hubot env flush all --dry-run - Try flushing all current environment variables in redis and process.env
-#   hubot env flush all - Flush all current environment variables in redis and process.env
+#   hubot env flush all --dry-run - Try flushing all current environment variables in process.env and redis
+#   hubot env flush all - Flush all current environment variables in process.env and redis
 
 util = require "util"
 
@@ -27,7 +27,7 @@ module.exports = (robot) ->
 
     if dry_run
       loadedStr = util.inspect(loaded.env, false, null)
-      msg.send "Complete dry-run: loadedStr=#{loadedStr}"
+      msg.send "Complete dry-run: loadedData=#{loadedStr}"
       return
 
     for key, value of loaded.env

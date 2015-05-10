@@ -1,5 +1,5 @@
 # Description:
-#   Loaded all current environment variables in redis when bootstrapping hubot
+#   Loaded all current environment variables from redis to process.env when bootstrapping hubot
 
 brain_key = "hubot-env"
 

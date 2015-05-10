@@ -1,9 +1,9 @@
 # Description:
-#   Loads file of environment variables
+#   Loads file of environment variables in process.env and redis
 #
 # Commands:
-#   hubot env load --filename=[filename] --dry-run - Try loading [filename] of environment variables
-#   hubot env load --filename=[filename] - Loads [filename] of environment variables
+#   hubot env load --filename=[filename] --dry-run - Try loading [filename] of environment variables in process.env and redis
+#   hubot env load --filename=[filename] - Loads [filename] of environment variables in process.env and redis
 
 fs   = require 'fs'
 path = require 'path'
